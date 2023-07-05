@@ -10,20 +10,21 @@ public class Sudoku {
 	public static final int ROWS = 9, COLS = 9;
 	public static final int BOX = 3;
 
-	private Sudoku() {
-	}
-
 	/*
 	 * Construct sudoku with one string
 	 */
 	public Sudoku(String s) {
-
+		initFiller();
 		String[] rows = s.split(" ");
 		if (rows.length != ROWS) {
 			System.err.println("Invalid rows " + rows.length);
 		}
 		sudoku = new int[9][];
 		init(rows);
+	}
+
+	private void initFiller() {
+		
 	}
 
 	public void init(String[] rows) {
@@ -111,16 +112,16 @@ public class Sudoku {
 	}
 
 	public boolean isSolved() {
-		boolean solved=true;
+		boolean solved = true;
 		for (int i = 0; i < ROWS; i++) {
 			if (!checkRows(i)) {
-				solved=false;
+				solved = false;
 				System.out.println("Not solved for row " + i);
 			}
 		}
 		for (int j = 0; j < ROWS; j++) {
 			if (!checkCols(j)) {
-				solved=false;
+				solved = false;
 				System.out.println("Not solved for col " + j);
 			}
 		}
@@ -128,7 +129,7 @@ public class Sudoku {
 			for (int j = 0; j < BOX; j++) {
 				int[][] box = box(i, j);
 				if (!checkBox(box)) {
-					solved=false;
+					solved = false;
 					System.out.println("Not solved for Box " + i + "," + j);
 				}
 			}
@@ -181,33 +182,16 @@ public class Sudoku {
 	public static void main(String[] s) {
 		Sudoku sudoku = new Sudoku(
 				"123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789");
-		//sudoku.print();
+		sudoku.print();
 		System.out.println(" ");
 
-		Sudoku sudoku1 = new Sudoku(
-				  "326984157 "
-				+ "981657423 "
-				+ "475132968 "
-				+ "258473619 "
-				+ "764519382 "
-				+ "193826745 "
-				+ "642398571 "
-				+ "819745236 "
-				+ "537261894");
-		//sudoku1.print();
-		//System.out.println(sudoku1.isSolved());
-		
-		
-		Sudoku s2 = new Sudoku(
-				  "634100527 "
-				+ "075032000 "
-				+ "890500003 "
-				+ "357080200 "
-				+ "408000709 "
-				+ "001020834 "
-				+ "000006045 "
-				+ "000470980 "
-				+ "243009176");
+		Sudoku sudoku1 = new Sudoku("326984157 " + "981657423 " + "475132968 " + "258473619 " + "764519382 "
+				+ "193826745 " + "642398571 " + "819745236 " + "537261894");
+		// sudoku1.print();
+		System.out.println(sudoku1.isSolved());
+
+		Sudoku s2 = new Sudoku("634100527 " + "075032000 " + "890500003 " + "357080200 " + "408000709 " + "001020834 "
+				+ "000006045 " + "000470980 " + "243009176");
 		s2.print();
 		System.out.println(s2.isSolved());
 
